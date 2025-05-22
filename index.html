@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holiday Sunday! 🎉</title>
+    <style>
+        /* Holiday Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            /* Festive Gradient Background */
+            background: linear-gradient(to bottom right, #ffdd72, #ffab00, #ff6b6b); /* Golden to Orange to Red */
+            color: #333;
+            overflow: hidden; /* Prevent scrollbar from canvas */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for a dreamy effect */
+            padding: 30px;
+            border-radius: 20px; /* More rounded corners */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            border: 3px solid #ffd700; /* Gold border */
+            position: relative; /* For z-index to work */
+            z-index: 10; /* Ensure container is above fireworks */
+            backdrop-filter: blur(5px); /* Subtle blur behind the container (modern browsers) */
+            -webkit-backdrop-filter: blur(5px); /* Safari support */
+        }
+
+        .sunday-gif {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px; /* More rounded GIF */
+            margin-bottom: 25px;
+            border: 4px solid #ffaa00; /* Bright orange border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            animation: bounceIn 1s ease-out; /* Add an entrance animation */
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        h2 {
+            color: #d84315; /* Deep holiday red */
+            margin-bottom: 30px;
+            font-size: 2.2em; /* Larger heading */
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease-out;
+            animation-delay: 0.5s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-section label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .input-section input[type="text"] {
+            width: calc(100% - 24px); /* Adjusted padding */
+            padding: 14px;
+            margin-bottom: 25px;
+            border: 2px solid #ffcc80; /* Lighter orange border */
+            border-radius: 10px; /* More rounded input */
+            font-size: 1.1em;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            color: #444;
+        }
+
+        .input-section input[type="text"]:focus {
+            border-color: #ff8c00; /* Darker orange on focus */
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        .input-section button {
+            background-color: #ff8c00; /* Holiday orange */
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .input-section button:hover {
+            background-color: #e67d00; /* Darker orange on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .share-link-container {
+            margin-top: 35px;
+            padding: 20px;
+            background-color: #fff8e1; /* Very light gold */
+            border: 2px dashed #ffd700; /* Gold dashed border */
+            border-radius: 12px;
+            display: none; /* Initially hidden */
+            word-wrap: break-word;
+            animation: fadeIn 0.8s ease-out;
+            display: flex; /* Use flexbox for buttons */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .share-link-container p {
+            margin: 0 0 12px 0;
+            font-weight: bold;
+            color: #777;
+            font-size: 1.1em;
+        }
+
+        .share-link-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1em;
+            display: block;
+            word-break: break-all;
+            margin-bottom: 15px; /* More space between link and buttons */
+            transition: color 0.3s;
+        }
+
+        .share-link-container a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        .share-buttons-group {
+            display: flex;
+            gap: 15px; /* Space between share buttons */
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px; /* Space above the button group */
+        }
+
+        #copyLinkBtn, #shareViaAppsBtn, #whatsappShareBtn {
+            margin-top: 0; /* Remove top margin from individual buttons */
+            padding: 12px 20px; /* Adjust padding for uniformity */
+            font-size: 1em; /* Adjust font size */
+            flex: 1; /* Allow buttons to grow */
+            min-width: 120px; /* Minimum width for buttons */
+            display: flex; /* For icon and text alignment */
+            align-items: center;
+            justify-content: center;
+        }
+
+        #copyLinkBtn {
+            background-color: #28a745; /* Green for copy button */
+        }
+
+        #copyLinkBtn:hover {
+            background-color: #218838;
+        }
+
+        #shareViaAppsBtn {
+            background-color: #007bff; /* Blue for share via apps */
+        }
+
+        #shareViaAppsBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #whatsappShareBtn {
+            background-color: #25D366; /* WhatsApp green */
+        }
+
+        #whatsappShareBtn:hover {
+            background-color: #1DA851;
+        }
+
+        /* Firework Canvas */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 5; /* Below the container */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="fireworks-canvas"></canvas>
+
+    <div class="container">
+        <img src="Happy Sunday.gif" alt="Happy Sunday Animation" class="sunday-gif">
+
+        <h2 id="greetingMessage">Happy Sunday! 🎉</h2>
+
+        <div class="input-section">
+            <label id="inputLabel" for="yourNameInput">अपना नाम यहाँ लिखें:</label>
+            <input type="text" id="yourNameInput" placeholder="जैसे: राहुल">
+            <button id="generateLinkBtn">लिंक जनरेट करें</button>
+
+            <div id="shareLinkContainer" class="share-link-container">
+                <p>यह लिंक शेयर करें:</p>
+                <a id="shareLink" href="#" target="_blank"></a>
+                <div class="share-buttons-group">
+                    <button id="whatsappShareBtn">
+                        <!-- WhatsApp SVG Icon (embedded directly) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 1.2em; height: 1.2em; vertical-align: middle; margin-right: 8px; fill: currentColor;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M380.9 97.1C339.4 55.6 283.8 32 224 32S108.6 55.6 67.1 97.1 32 183.8 32 243.8V448l112-112h48zm57.1 192C448 160 348 64 224 64 99.9 64 0 160 0 288c0 51.7 26.5 99.4 71.8 132.8L0 480l134.4-44.8C189.6 470.8 255 480 320 480c124 0 224-96 224-224 0-51.7-26.5-99.4-71.8-132.8L448 32z"/></svg>
+                        WhatsApp पर शेयर करें
+                    </button>
+                    <button id="shareViaAppsBtn" style="display: none;">शेयर करें (Apps)</button>
+                    <button id="copyLinkBtn">लिंक कॉपी करें</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const greetingMessage = document.getElementById('greetingMessage');
+            const inputLabel = document.getElementById('inputLabel');
+            const yourNameInput = document.getElementById('yourNameInput');
+            const generateLinkBtn = document.getElementById('generateLinkBtn');
+            const shareLinkContainer = document.getElementById('shareLinkContainer');
+            const shareLink = document.getElementById('shareLink');
+            const copyLinkBtn = document.getElementById('copyLinkBtn');
+            const shareViaAppsBtn = document.getElementById('shareViaAppsBtn');
+            const whatsappShareBtn = document.getElementById('whatsappShareBtn'); // New WhatsApp button
+
+            // Firework Canvas Setup
+            const canvas = document.getElementById('fireworks-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let lastFireworkTime = 0;
+            // Increased firework density/frequency
+            const fireworkInterval = 300; // milliseconds between fireworks (previously 1000)
+
+            // Set canvas size to full window
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas(); // Initial resize
+
+            // Particle class for fireworks
+            class Particle {
+                constructor(x, y, color, velocityX, velocityY) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    this.vx = velocityX;
+                    this.vy = velocityY;
+                    this.alpha = 1;
+                    this.gravity = 0.03; // Slight downward pull
+                    this.friction = 0.99; // Slows down particles
+                    this.decay = Math.random() * 0.03 + 0.01; // Rate of fading
+                    this.radius = Math.random() * 2 + 1; // Size of particle
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                update() {
+                    this.vy += this.gravity; // Apply gravity
+                    this.vx *= this.friction; // Apply friction
+                    this.vy *= this.friction;
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    this.alpha -= this.decay; // Fade out
+                }
+            }
+
+            // Function to create an explosion of particles
+            function createFirework(x, y) {
+                const hue = Math.random() * 360; // Random hue
+                const saturation = '100%';
+                const lightness = '70%'; // Brightness
+
+                const color = `hsl(${hue}, ${saturation}, ${lightness})`;
+
+                // Increased number of particles per firework
+                const numParticles = 180 + Math.floor(Math.random() * 120); // 180 to 300 particles (previously 60-100)
+                for (let i = 0; i < numParticles; i++) {
+                    const angle = Math.random() * Math.PI * 2; // Random angle
+                    const speed = Math.random() * 3 + 1; // Random speed
+                    const vx = Math.cos(angle) * speed;
+                    const vy = Math.sin(angle) * speed;
+                    particles.push(new Particle(x, y, color, vx, vy));
+                }
+            }
+
+            // Animation loop for fireworks
+            function animateFireworks(timestamp) {
+                requestAnimationFrame(animateFireworks);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+                if (senderName && timestamp - lastFireworkTime > fireworkInterval) {
+                    // Only launch if senderName is present AND interval has passed
+                    const x = Math.random() * canvas.width * 0.8 + canvas.width * 0.1; // Random x position
+                    const y = Math.random() * canvas.height * 0.4 + canvas.height * 0.1; // Random y position (top part of screen)
+                    createFirework(x, y);
+                    lastFireworkTime = timestamp;
+                }
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update();
+                    p.draw();
+
+                    if (p.alpha <= 0.1 || p.radius <= 0.5) { // Remove faded or tiny particles
+                        particles.splice(i, 1);
+                    }
+                }
+            }
+
+
+            // URL se 'from' parameter check karein
+            const urlParams = new URLSearchParams(window.location.search);
+            const senderName = urlParams.get('from');
+
+            if (senderName) {
+                // Agar 'from' parameter hai, matlab yeh link kisi ne bheja hai
+                greetingMessage.innerHTML = `Happy Sunday from <span style="color: #4CAF50; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">${decodeURIComponent(senderName)}</span>! 🎉`;
+                inputLabel.textContent = "आप भी अपना नाम लिखकर आगे शेयर करें:";
+                // Start fireworks animation if a sender name is present
+                animateFireworks(0); // Start the animation loop
+            } else {
+                // Agar 'from' parameter nahi hai, matlab user khud link generate kar raha hai
+                greetingMessage.textContent = `Happy Sunday! 🎉`;
+                inputLabel.textContent = "अपना नाम यहाँ लिखें:";
+            }
+
+            // Link generate karne ka functionality
+            generateLinkBtn.addEventListener('click', () => {
+                const name = yourNameInput.value.trim(); // Naam ko trim karein (extra spaces hataayein)
+                if (name) {
+                    // Current URL ka base part lein (bina kisi query parameters ke)
+                    const baseUrl = window.location.origin + window.location.pathname;
+                    const newLink = `${baseUrl}?from=${encodeURIComponent(name)}`; // Naam ko URL-safe banayein
+                    
+                    shareLink.href = newLink;
+                    shareLink.textContent = newLink;
+                    shareLinkContainer.style.display = 'flex'; // Link container ko dikhayein
+                    
+                    // Show share via apps button if supported
+                    if (navigator.share) {
+                        shareViaAppsBtn.style.display = 'flex'; // Use flex for icon alignment
+                    } else {
+                        shareViaAppsBtn.style.display = 'none'; // Hide if not supported
+                    }
+
+                    // Optional: Scroll to the link container for better UX on mobile
+                    shareLinkContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                } else {
+                    alert('कृपया अपना नाम दर्ज करें!');
+                }
+            });
+
+            // Link copy karne ka functionality
+            copyLinkBtn.addEventListener('click', () => {
+                const linkToCopy = shareLink.textContent;
+                navigator.clipboard.writeText(linkToCopy).then(() => {
+                    alert('लिंक क्लिपबोर्ड पर कॉपी हो गया!');
+                }).catch(err => {
+                    console.error('लिंक कॉपी करने में विफल रहा:', err);
+                    alert('लिंक कॉपी नहीं हो सका। कृपया इसे मैन्युअल रूप से कॉपी करें।');
+                });
+            });
+
+            // Share via Apps functionality (using Web Share API)
+            shareViaAppsBtn.addEventListener('click', async () => {
+                const currentLink = shareLink.textContent; // Generated link
+                const sender = yourNameInput.value.trim();
+                const shareText = `आपको ${sender ? sender : 'किसी दोस्त'} ने Happy Sunday का संदेश भेजा है! इस शानदार ग्रीटिंग के लिए यहाँ क्लिक करें:`;
+                
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'Happy Sunday Greeting!',
+                            text: shareText,
+                            url: currentLink
+                        });
+                        console.log('Content shared successfully via Web Share API');
+                    } catch (error) {
+                        console.error('Error sharing via Web Share API:', error);
+                        if (error.name === 'AbortError') {
+                            console.log('Share cancelled by user');
+                        } else {
+                            alert('शेयर करने में कोई समस्या हुई। कृपया लिंक कॉपी करके मैन्युअल रूप से शेयर करें।');
+                        }
+                    }
+                } else {
+                    // Fallback should ideally not be reached if button is hidden when not supported
+                    alert('आपका ब्राउज़र सीधे शेयर करने का समर्थन नहीं करता है। कृपया "लिंक कॉपी करें" बटन का उपयोग करें और मैन्युअल रूप से शेयर करें।');
+                }
+            });
+
+            // Share via WhatsApp direct link
+            whatsappShareBtn.addEventListener('click', () => {
+                const currentLink = shareLink.textContent; // Generated link
+                const sender = yourNameInput.value.trim();
+                const shareText = `आपको ${sender ? sender : 'किसी दोस्त'} ने Happy Sunday का संदेश भेजा है! इस शानदार ग्रीटिंग के लिए यहाँ क्लिक करें:`;
+                
+                // Encode the full message for URL
+                const encodedMessage = encodeURIComponent(`${shareText}\n${currentLink}`);
+                
+                // WhatsApp Web/App link
+                const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank'); // Open in a new tab/window
+            });
+        });
+    </script>
+</body>
+</html>
